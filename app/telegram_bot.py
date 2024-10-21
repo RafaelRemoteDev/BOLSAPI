@@ -3,6 +3,14 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 from app.services import get_bitcoin_price, get_gold_price, get_silver_price
 from apscheduler.schedulers.background import BackgroundScheduler
 import time
+from loguru import logger
+
+# Configuración para guardar los logs en un archivo
+logger.add("app_logs.log", rotation="1 MB", retention="10 days", level="DEBUG")
+
+# Un mensaje simple para verificar que Loguru está funcionando
+logger.info("Bot de Telegram iniciado correctamente")
+
 
 # Inicializa un valor de precios antiguos
 previous_prices = {
