@@ -2,15 +2,14 @@ from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 from app.services import get_bitcoin_price, get_gold_price, get_silver_price
 from apscheduler.schedulers.background import BackgroundScheduler
-import time
 from loguru import logger
+import time
 
 # Configuración para guardar los logs en un archivo
 logger.add("app_logs.log", rotation="1 MB", retention="10 days", level="DEBUG")
 
 # Un mensaje simple para verificar que Loguru está funcionando
 logger.info("Bot de Telegram iniciado correctamente")
-
 
 # Inicializa un valor de precios antiguos
 previous_prices = {
@@ -56,8 +55,10 @@ async def show_prices(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 # Inicializa el bot y los handlers
 def main():
-    application = ApplicationBuilder().token('YOUR TELEGRAM TOKEN').build()
+    # Reemplaza 'YOUR TELEGRAM TOKEN' por tu token de BotFather
+    application = ApplicationBuilder().token('7726295961:AAFeWvujqB2B4B-K-0e0nwb2mPwWY6CHifY').build()
 
+    # Reemplaza 'YOUR_CHAT_ID' por tu chat ID personal o del grupo donde enviarás las alertas
     application.add_handler(CommandHandler("start", show_prices))
     application.add_handler(CommandHandler("prices", show_prices))
 
@@ -71,4 +72,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
